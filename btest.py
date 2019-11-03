@@ -16,10 +16,8 @@ def decodeB64(data):
 
 def dump():
   return {'contents': {
-                'source': 'data:,{}'.format(encodeB64(data))
+                'source': 'data:text/plain;charset=utf-8;base64,{}'.format(encodeB64(data))
             }}
-
-
 
 #print(encodeB64(data))
 print(dump())
