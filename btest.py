@@ -14,7 +14,13 @@ def decodeB64(data):
   decodedStr = str(decodedBytes, "utf-8")
   return decodedStr
 
+def dump():
+  return {'contents': {
+                'source': 'data:,{}'.format(encodeB64(data))
+            }}
 
 
-print(encodeB64(data))
-print(decodeB64(encodeB64(data)))
+
+#print(encodeB64(data))
+print(dump())
+#print(decodeB64(encodeB64(data)))
