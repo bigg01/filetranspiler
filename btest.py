@@ -22,7 +22,11 @@ def dump():
             }}
 
 #ignition
-https://github.com/utilitywarehouse/on-prem-kube/blob/master/ignition/ic/worker0.ign
+
+# https://github.com/utilitywarehouse/on-prem-kube/blob/master/ignition/ic/worker0.ign
+
+# terraform
+#https://www.terraform.io/docs/providers/ignition/index.html
 
 print(decodeB64(data2))
 print(dump())
