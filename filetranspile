@@ -8,8 +8,9 @@ import argparse
 import json
 import os
 import stat
+import base64
 
-from urllib.parse import quote
+#from urllib.parse import quote
 
 __version__ = '1.1.0'
 
@@ -161,9 +162,12 @@ class SpecV2(IgnitionSpec):
             "filesystem": 'root',
             'mode': int(mode, 8),
             'contents': {
-                'source': 'data:,{}'.format(quote(file_contents))
+                'source': 'data:text/plain;charset=utf-8;base64,{}'.format(base64.b64encode(str.encode(file_contents)))
             }
         }
+
+#base64.urlsafe_b64encode(b
+# str.encode("oli")
 
     def link_to_ignition(self, file_path, target_path):
         """
@@ -207,9 +211,10 @@ class SpecV3(IgnitionSpec):
             'mode': int(mode, 8),
             'overwrite': True,
             'contents': {
-                'source': 'data:,{}'.format(quote(file_contents))
+                'source': 'data:text/plain;charset=utf-8;base64,{}'.format(base64.b64encode(str.encode(file_contents)))
             }
         }
+
 
     def link_to_ignition(self, file_path, target_path):
         """
