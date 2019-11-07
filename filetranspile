@@ -15,6 +15,23 @@ import base64
 __version__ = '1.1.0'
 
 
+def encodeB64(data):
+  # URL and Filename Safe Base64 Encoding
+  urlSafeEncodedBytes = base64.urlsafe_b64encode(data.encode("utf-8"))
+  urlSafeEncodedStr = str(urlSafeEncodedBytes, "utf-8")
+  #print(urlSafeEncodedStr)
+  return urlSafeEncodedStr
+
+def decodeB64(data):
+  decodedBytes = base64.urlsafe_b64decode(data)
+  decodedStr = str(decodedBytes, "utf-8")
+  return decodedStr
+
+def dump(file_contents):
+  return {'contents': {
+                'source': 'data:text/plain;charset=utf-8;base64,{}'.format(encodeB64(file_contents))
+            }}
+
 class FileTranspilerError(Exception):
     """
     Base exception for FileTranspiler errors.
@@ -162,7 +179,7 @@ class SpecV2(IgnitionSpec):
             "filesystem": 'root',
             'mode': int(mode, 8),
             'contents': {
-                'source': 'data:text/plain;charset=utf-8;base64,{}'.format(base64.b64encode(str.encode(file_contents)))
+                'source': 'data:text/plain;charset=utf-8;base64,{}'.format(encodeB64(file_contents))
             }
         }
 
@@ -211,7 +228,7 @@ class SpecV3(IgnitionSpec):
             'mode': int(mode, 8),
             'overwrite': True,
             'contents': {
-                'source': 'data:text/plain;charset=utf-8;base64,{}'.format(base64.b64encode(str.encode(file_contents)))
+                'source': 'data:text/plain;charset=utf-8;base64,{}'.format(encodeB64(file_contents))
             }
         }
 
